@@ -1,0 +1,313 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BASE  –  original do projeto
+   ═══════════════════════════════════════════════════════════════════════════ */
+body {
+  background: #f0f5ff;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(37,99,235,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(37,99,235,0.08) 0%, transparent 50%);
+  background-attachment: fixed;
+  font-family: "Arial", sans-serif;
+  min-height: 100vh;
+  color: #1a2847;
+}
+
+.container {
+  margin: 25px;
+}
+
+/* ── Navbar ─────────────────────────────────────────────────────────────── */
+.navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 24px;
+  background: linear-gradient(90deg, #ffffff, #f0f5ff);
+  border: 1px solid #c7d7f5;
+  border-bottom: 2px solid #2563eb;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.10),
+              inset 0 1px 0 rgba(255,255,255,0.8);
+  min-width: 0;
+}
+
+.navbar-title {
+  font-size: 20px;
+  font-weight: 900;
+  color: #1a2847;
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-right: 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 10px 20px;
+  min-width: 0;
+}
+
+.nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #1a2847;
+}
+
+/* ── Boxes genéricos (dashboard) ─────────────────────────────────────── */
+.box {
+  background: linear-gradient(135deg, #ffffff, #f0f5ff);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #c7d7f5;
+  box-shadow: 0 2px 16px rgba(37,99,235,0.08);
+  color: #1a2847;
+}
+
+.boxk {
+  margin-top: 40px;
+  background: #ffffff;
+  border: 1px solid #c7d7f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.06);
+}
+
+/* ── Sidebar padrão Shiny (dashboard) ───────────────────────────────── */
+.well {
+  background: linear-gradient(180deg, #ffffff, #f0f5ff) !important;
+  border-radius: 10px;
+  border: 1px solid #2563eb !important;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.12);
+  color: #1a2847;
+}
+
+h4 {
+  color: #1a2847;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.selectize-input,
+.irs {
+  background: #ffffff !important;
+  border-color: #2563eb !important;
+  color: #1a2847 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ESTATÍSTICA DESCRITIVA  –  original do projeto
+   ═══════════════════════════════════════════════════════════════════════════ */
+.stats-page {
+  padding: 2rem;
+}
+
+.stats-page h2 {
+  margin-bottom: 0.4rem;
+  color: #2c3e50;
+}
+
+.stats-page > p {
+  color: #666;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.stats-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+.stats-table-wrapper table {
+  width: 100%;
+  min-width: 820px;
+  border-collapse: collapse;
+  font-size: 2rem;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.stats-table-wrapper thead tr th {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 12px 18px;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: none;
+}
+
+.stats-table-wrapper thead tr th:first-child {
+  text-align: left;
+  border-radius: 8px 0 0 0;
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  background-color: #2c3e50;
+}
+
+.stats-table-wrapper thead tr th:last-child {
+  border-radius: 0 8px 0 0;
+}
+
+.stats-table-wrapper tbody tr td {
+  padding: 10px 18px;
+  text-align: center;
+  white-space: nowrap;
+  border-bottom: 1px solid #e8ecef;
+  color: #333;
+  background-color: #fff;
+}
+
+.stats-table-wrapper tbody tr td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #2c3e50;
+  background-color: #f4f6f8;
+  border-right: 2px solid #dde3ea;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.stats-table-wrapper tbody tr:nth-child(even) td           { background-color: #f9fafb; }
+.stats-table-wrapper tbody tr:nth-child(even) td:first-child { background-color: #edf0f3; }
+.stats-table-wrapper tbody tr:hover td                     { background-color: #e8f4fd; }
+.stats-table-wrapper tbody tr:hover td:first-child         { background-color: #d6ebf8; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VISUALIZAÇÕES  –  novo, integrado ao design existente
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Wrapper de cada bloco: sidebar + gráfico lado a lado */
+.viz-block {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 24px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #c7d7f5;
+  box-shadow: 0 2px 16px rgba(37,99,235,0.08);
+  background: #ffffff;
+  min-height: 370px;
+}
+
+/* ── Sidebar de controles ─────────────────────────────────────────────── */
+.viz-sidebar {
+  width: 230px;
+  min-width: 210px;
+  flex-shrink: 0;
+  /* mesmo gradiente do .well / dashboard sidebar */
+  background: linear-gradient(180deg, #ffffff, #f0f5ff);
+  border-right: 2px solid #2563eb;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.viz-sidebar h4 {
+  font-size: 0.92rem;
+  font-weight: 900;
+  color: #1a2847;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  margin-bottom: 2px;
+  border-bottom: 2px solid #2563eb;
+}
+
+/* Labels */
+.viz-sidebar .control-label,
+.viz-sidebar label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+
+/* Inputs select */
+.viz-sidebar .form-control,
+.viz-sidebar select {
+  font-size: 0.85rem;
+  border: 1px solid #2563eb;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1a2847;
+  padding: 5px 9px;
+  transition: box-shadow 0.2s;
+}
+
+.viz-sidebar .form-control:focus,
+.viz-sidebar select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.22);
+}
+
+/* Slider – barra e handle no azul do projeto */
+.viz-sidebar .irs--shiny .irs-bar {
+  background: #2563eb;
+  border-top-color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.viz-sidebar .irs--shiny .irs-handle {
+  background: #1a2847;
+  border-color: #2563eb;
+}
+
+.viz-sidebar .irs--shiny .irs-from,
+.viz-sidebar .irs--shiny .irs-to,
+.viz-sidebar .irs--shiny .irs-single {
+  background: #2563eb;
+}
+
+/* Checkboxes */
+.viz-sidebar .checkbox label,
+.viz-sidebar .shiny-input-checkboxgroup label {
+  font-size: 0.83rem;
+  color: #1a2847;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ── Área do gráfico ─────────────────────────────────────────────────── */
+.viz-plot {
+  flex: 1;
+  min-width: 0;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #ffffff, #f0f5ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viz-plot .shiny-plot-output {
+  width: 100% !important;
+}
+
+/* ── Responsividade ──────────────────────────────────────────────────── */
+@media (max-width: 720px) {
+  .viz-block      { flex-direction: column; min-height: unset; }
+  .viz-sidebar    { width: 100%; border-right: none; border-bottom: 2px solid #2563eb; }
+  .navbar-links   { gap: 8px 14px; }
+}

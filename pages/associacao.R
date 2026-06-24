@@ -1,7 +1,3 @@
-# ── Análise de Associação ──────────────────────────────────────────────────
-# Gráfico de correlação, tabela de contingência e teste qui-quadrado.
-
-# ── Helper: discretiza numérica em quartis ─────────────────────────────────
 discretizar <- function(x) {
   if (!is.numeric(x)) return(as.character(x))
   q <- unique(quantile(x, probs = c(0, 0.25, 0.5, 0.75, 1), na.rm = TRUE))
@@ -10,7 +6,6 @@ discretizar <- function(x) {
                    labels = paste0("Q", seq_len(length(q) - 1))))
 }
 
-# ── Helper: bloco de layout (segue estilo de viz_block) ───────────────────
 assoc_block <- function(sidebar_content, main_content, titulo) {
   div(
     class = "viz-block",
@@ -19,7 +14,6 @@ assoc_block <- function(sidebar_content, main_content, titulo) {
   )
 }
 
-# ── UI ──────────────────────────────────────────────────────────────────────
 associacao_ui <- function() {
   div(
     class = "stats-page",
@@ -73,10 +67,8 @@ associacao_ui <- function() {
   )
 }
 
-# ── Server ──────────────────────────────────────────────────────────────────
 associacao_server <- function(input, output, session) {
 
-  # 1. Gráfico de Correlação ──────────────────────────────────────────────
   output$plot_corr <- renderPlot({
     req(input$corr_vars, input$corr_method)
     vars <- input$corr_vars
@@ -106,7 +98,6 @@ associacao_server <- function(input, output, session) {
     }
   })
 
-  # 2. Tabela de Contingência ────────────────────────────────────────────
   output$tabela_contingencia <- renderUI({
     req(input$cont_varA, input$cont_varB)
 
@@ -119,7 +110,6 @@ associacao_server <- function(input, output, session) {
     nr      <- nrow(tab); nc <- ncol(tab)
     row_nms <- rownames(tab); col_nms <- colnames(tab)
 
-    # Normalização para heatmap — exclui linha e coluna de Total
     body_vals <- tab[row_nms != "Sum", col_nms != "Sum", drop = FALSE]
     max_val   <- max(body_vals, 1)
 
@@ -172,7 +162,6 @@ associacao_server <- function(input, output, session) {
     ))
   })
 
-  # 3. Teste Qui-Quadrado ────────────────────────────────────────────────
   output$resultado_chi <- renderUI({
     req(input$chi_varA, input$chi_varB, input$chi_alpha)
     alpha <- as.numeric(input$chi_alpha)
@@ -189,7 +178,6 @@ associacao_server <- function(input, output, session) {
     vB  <- discretizar(housing[[input$chi_varB]])
     tab <- table(A = vA, B = vB)
 
-    # Verificar premissa: todas as frequências esperadas >= 5
     expected <- tryCatch(
       suppressWarnings(chisq.test(tab, correct = FALSE)$expected),
       error = function(e) NULL
@@ -203,7 +191,6 @@ associacao_server <- function(input, output, session) {
     n_invalid   <- sum(expected < 5)
     premissa_ok <- n_invalid == 0
 
-    # Premissa não atendida: bloquear o teste
     if (!premissa_ok) {
       pct <- round(100 * n_invalid / length(expected), 1)
       return(div(
@@ -218,7 +205,6 @@ associacao_server <- function(input, output, session) {
       ))
     }
 
-    # Executar o teste
     result   <- suppressWarnings(chisq.test(tab, correct = FALSE))
     chi2     <- round(result$statistic, 4)
     df_val   <- result$parameter

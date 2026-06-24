@@ -5,7 +5,6 @@ source("pages/estatistica.R")
 source("pages/mapa.R")
 source("pages/associacao.R")
 
-# ── UI ──────────────────────────────────────────────────────────────────────
 ui <- fluidPage(
   tags$head(tags$link(rel = "stylesheet", type = "text/css", href = "style.css")),
   div(
@@ -30,21 +29,18 @@ ui <- fluidPage(
   )
 )
 
-# ── Server ──────────────────────────────────────────────────────────────────
 server <- function(input, output, session) {
 
   pagina_atual <- reactive({
     if (is.null(input$pagina)) "dashboard" else input$pagina
   })
 
-  # ── Servidores das páginas ─────────────────────────────────────────────
   dashboard_server(input, output, session)
   visualizacoes_server(input, output, session)
   estatistica_server(input, output, session)
   mapa_server(input, output, session)
   associacao_server(input, output, session)
 
-  # ── Roteador ──────────────────────────────────────────────────────────
   output$conteudo_principal <- renderUI({
     switch(pagina_atual(),
            "dashboard"     = dashboard_ui(),

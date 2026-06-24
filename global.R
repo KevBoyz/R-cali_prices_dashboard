@@ -1,9 +1,7 @@
 library(shiny)
 
-# ── Dados ──────────────────────────────────────────────────────────────────
 housing <- read.csv("housing.csv", stringsAsFactors = FALSE)
 
-# ── Helpers ────────────────────────────────────────────────────────────────
 calc_mode <- function(x) {
   tab      <- table(x)
   max_freq <- max(tab)
@@ -35,13 +33,11 @@ build_stats_table <- function(df) {
   as.data.frame(t(mat), stringsAsFactors = FALSE)
 }
 
-# ── Variáveis compartilhadas ───────────────────────────────────────────────
 num_vars  <- names(housing)[sapply(housing, is.numeric)]
 cat_vars  <- names(housing)[!sapply(housing, is.numeric)]
 all_vars  <- names(housing)
 group_var <- if (length(cat_vars) > 0) cat_vars[1] else NULL  # "ocean_proximity"
 
-# ── Paletas ────────────────────────────────────────────────────────────────
 group_palette <- c("#2563eb", "#e63946", "#2a9d8f", "#f4a261",
                    "#6d28d9", "#0ea5e9", "#f59e0b", "#10b981")
 
@@ -54,7 +50,6 @@ color_choices <- c(
   "Rosa"       = "#ff69b4"
 )
 
-# ── Descrição das colunas ──────────────────────────────────────────────────
 col_desc <- data.frame(
   `Variável` = c(
     "longitude", "latitude", "housing_median_age",

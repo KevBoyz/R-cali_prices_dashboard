@@ -1,7 +1,3 @@
-# ── Visualizações ──────────────────────────────────────────────────────────
-# Seis gráficos interativos: histograma, boxplot, barras, dispersão, setores e heatmap.
-
-# ── Helpers de layout (usados só aqui) ────────────────────────────────────
 viz_block <- function(sidebar_content, plot_id, titulo) {
   div(
     class = "viz-block",
@@ -14,14 +10,12 @@ grp_label <- function(prefix) {
   paste(prefix, if (!is.null(group_var)) group_var else "—")
 }
 
-# ── UI ──────────────────────────────────────────────────────────────────────
 visualizacoes_ui <- function() {
   div(
     class = "stats-page",
     h2("Visualizações"),
     p("Explore os dados do dataset Housing com diferentes tipos de gráficos."),
 
-    # 1. Histograma
     viz_block(
       tagList(
         selectInput("hist_var",   "Variável:",       choices = num_vars, selected = num_vars[1]),
@@ -32,7 +26,6 @@ visualizacoes_ui <- function() {
       "plot_hist", "Histograma"
     ),
 
-    # 2. Boxplot
     viz_block(
       tagList(
         selectInput("box_var",   "Variável Y:", choices = num_vars, selected = num_vars[1]),
@@ -43,7 +36,6 @@ visualizacoes_ui <- function() {
       "plot_box", "Boxplot"
     ),
 
-    # 3. Gráfico de Barras
     viz_block(
       tagList(
         selectInput("bar_var",  "Variável numérica:", choices = num_vars, selected = num_vars[1]),
@@ -56,7 +48,6 @@ visualizacoes_ui <- function() {
       "plot_bar", "Gráfico de Barras"
     ),
 
-    # 4. Gráfico de Dispersão
     viz_block(
       tagList(
         selectInput("disp_x", "Eixo X:", choices = num_vars, selected = num_vars[1]),
@@ -68,7 +59,6 @@ visualizacoes_ui <- function() {
       "plot_disp", "Gráfico de Dispersão"
     ),
 
-    # 5. Gráfico de Setores
     viz_block(
       tagList(
         selectInput("pie_var",  "Variável numérica:", choices = num_vars, selected = num_vars[1]),
@@ -93,10 +83,8 @@ visualizacoes_ui <- function() {
   )
 }
 
-# ── Server ──────────────────────────────────────────────────────────────────
 visualizacoes_server <- function(input, output, session) {
 
-  # 1. Histograma
   output$plot_hist <- renderPlot({
     req(input$hist_var, input$hist_bins, input$hist_color)
     x <- housing[[input$hist_var]]
@@ -110,7 +98,6 @@ visualizacoes_server <- function(input, output, session) {
     }
   })
 
-  # 2. Boxplot
   output$plot_box <- renderPlot({
     req(input$box_var, input$box_color)
     if (isTRUE(input$box_group) && !is.null(group_var)) {
@@ -131,7 +118,6 @@ visualizacoes_server <- function(input, output, session) {
     }
   })
 
-  # 3. Gráfico de Barras
   output$plot_bar <- renderPlot({
     req(input$bar_var, input$bar_stat, input$bar_color)
     if (is.null(group_var)) {
@@ -149,7 +135,6 @@ visualizacoes_server <- function(input, output, session) {
             las   = 2)
   })
 
-  # 4. Gráfico de Dispersão
   output$plot_disp <- renderPlot({
     req(input$disp_x, input$disp_y, input$disp_cex)
     if (isTRUE(input$disp_group) && !is.null(group_var)) {
@@ -175,7 +160,6 @@ visualizacoes_server <- function(input, output, session) {
     }
   })
 
-  # 5. Gráfico de Setores
   output$plot_pie <- renderPlot({
     req(input$pie_var, input$pie_stat)
     if (is.null(group_var)) {

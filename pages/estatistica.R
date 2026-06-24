@@ -1,6 +1,3 @@
-# ── Estatística Descritiva ─────────────────────────────────────────────────
-# Tabela com resumo estatístico completo de todas as variáveis do dataset.
-
 estatistica_ui <- function() {
   div(
     class = "stats-page",

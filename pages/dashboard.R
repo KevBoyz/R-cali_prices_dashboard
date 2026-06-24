@@ -1,6 +1,3 @@
-# ── Dashboard ──────────────────────────────────────────────────────────────
-# Exibe a descrição das colunas do dataset.
-
 dashboard_ui <- function() {
   div(
     class = "stats-page",

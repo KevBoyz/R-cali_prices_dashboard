@@ -69,7 +69,6 @@ visualizacoes_ui <- function() {
       "plot_pie", "Gráfico de Setores"
     ),
 
-    # 6. Heatmap de Correlação
     viz_block(
       tagList(
         checkboxGroupInput("heat_vars", "Variáveis:", choices = num_vars, selected = num_vars),
@@ -127,24 +126,24 @@ visualizacoes_server <- function(input, output, session) {
     vals <- tapply(housing[[input$bar_var]], housing[[group_var]], fn, na.rm = TRUE)
     par(mar = c(9, 5, 4, 2))
     barplot(vals,
-            col   = input$bar_color, border = "white",
+            col = input$bar_color, border = "white",
             horiz = isTRUE(input$bar_horiz),
-            main  = paste(input$bar_stat, "de", input$bar_var, "por", group_var),
-            xlab  = if (!isTRUE(input$bar_horiz)) "" else input$bar_var,
-            ylab  = if (!isTRUE(input$bar_horiz)) input$bar_var else "",
-            las   = 2)
+            main = paste(input$bar_stat, "de", input$bar_var, "por", group_var),
+            xlab = if (!isTRUE(input$bar_horiz)) "" else input$bar_var,
+            ylab = if (!isTRUE(input$bar_horiz)) input$bar_var else "",
+            las = 2)
   })
 
   output$plot_disp <- renderPlot({
     req(input$disp_x, input$disp_y, input$disp_cex)
     if (isTRUE(input$disp_group) && !is.null(group_var)) {
-      cats    <- sort(unique(housing[[group_var]]))
-      n_cats  <- length(cats)
-      pal     <- setNames(group_palette[seq_len(n_cats)], cats)
+      cats <- sort(unique(housing[[group_var]]))
+      n_cats <- length(cats)
+      pal <- setNames(group_palette[seq_len(n_cats)], cats)
       col_vec <- adjustcolor(pal[housing[[group_var]]], alpha.f = 0.5)
     } else {
       col_vec <- adjustcolor("#2563eb", alpha.f = 0.4)
-      pal     <- NULL
+      pal <- NULL
     }
     plot(housing[[input$disp_x]], housing[[input$disp_y]],
          col = col_vec, pch = 19, cex = input$disp_cex,
@@ -175,7 +174,7 @@ visualizacoes_server <- function(input, output, session) {
     cores  <- group_palette[seq_len(n_cats)]
     labels <- names(vals)
     if (isTRUE(input$pie_pct)) {
-      pcts   <- round(100 * vals / sum(vals), 1)
+      pcts <- round(100 * vals / sum(vals), 1)
       labels <- paste0(labels, "\n", pcts, "%")
     }
     pie(vals, labels = labels, col = cores,
@@ -183,7 +182,6 @@ visualizacoes_server <- function(input, output, session) {
                      if (input$pie_stat == "n") "Contagem" else paste(input$pie_stat, "de", input$pie_var)))
   })
 
-  # 6. Heatmap de Correlação
   output$plot_heat <- renderPlot({
     req(input$heat_vars, input$heat_color)
     vars <- input$heat_vars

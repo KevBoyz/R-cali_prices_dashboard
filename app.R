@@ -15,9 +15,9 @@ ui <- fluidPage(
              onclick = "Shiny.setInputValue('pagina','dashboard',{priority:'event'})"),
       div(
         class = "navbar-links",
-        tags$a("Mapa Interativo",        href = "#", class = "nav-link",
+        tags$a("Mapa Interativo", href = "#", class = "nav-link",
                onclick = "Shiny.setInputValue('pagina','mapa',{priority:'event'})"),
-        tags$a("Visualizações",          href = "#", class = "nav-link",
+        tags$a("Visualizações", href = "#", class = "nav-link",
                onclick = "Shiny.setInputValue('pagina','visualizacoes',{priority:'event'})"),
         tags$a("Análise de Associação",  href = "#", class = "nav-link",
                onclick = "Shiny.setInputValue('pagina','associacao',{priority:'event'})"),
@@ -43,11 +43,11 @@ server <- function(input, output, session) {
 
   output$conteudo_principal <- renderUI({
     switch(pagina_atual(),
-           "dashboard"     = dashboard_ui(),
+           "dashboard" = dashboard_ui(),
            "visualizacoes" = visualizacoes_ui(),
-           "estatistica"   = estatistica_ui(),
-           "mapa"          = mapa_ui(),
-           "associacao"    = associacao_ui(),
+           "estatistica" = estatistica_ui(),
+           "mapa" = mapa_ui(),
+           "associacao" = associacao_ui(),
            div(class = "stats-page", h2("Página não encontrada"))
     )
   })
